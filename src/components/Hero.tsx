@@ -6,9 +6,9 @@ export function Hero() {
     'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
   ]
 
-  // Contoured stepped path with smooth corner radii (R=32 on outer corners, R=24 on step transitions)
+  // Contoured stepped path with smooth corner radii (R=32 on outer corners, R=16 on step transitions)
   const steppedCardPath =
-    'M 1,33 A 32,32 0 0,1 33,1 L 536,1 A 24,24 0 0,1 560,25 L 560,109.5 A 24,24 0 0,1 536,133.5 L 473.7,133.5 A 24,24 0 0,0 449.7,157.5 L 449.7,289 A 24,24 0 0,1 425.7,313 L 33,313 A 32,32 0 0,1 1,281 Z'
+    'M 1,33 A 32,32 0 0,1 33,1 L 536,1 A 24,24 0 0,1 560,25 L 560,117.5 A 16,16 0 0,1 544,133.5 L 465.7,133.5 A 16,16 0 0,0 449.7,149.5 L 449.7,297 A 16,16 0 0,1 433.7,313 L 33,313 A 32,32 0 0,1 1,281 Z'
 
   return (
     <section className="relative z-20 pt-16 pb-24">
@@ -70,8 +70,8 @@ export function Hero() {
             />
           </svg>
 
-          {/* AI Generator Label Badge */}
-          <div className="pointer-events-none absolute bottom-5 left-[280px]">
+          {/* AI Generator Label Badge (Pen: x: 280, y: 283) */}
+          <div className="pointer-events-none absolute left-[280px] top-[283px]">
             <span className="font-[family-name:var(--font-work)] text-[21px] font-medium tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
               AI Generator
             </span>
@@ -94,14 +94,14 @@ export function Hero() {
         </div>
 
         {/* 3. Group 14: Community Card (x: 466, y: 170, w: 387, h: 159, nested into step notch) */}
-        <div className="absolute left-[466px] top-[170px] w-[387px] h-[159px] rounded-[24px] bg-[#6843ec] p-5 text-white shadow-xl flex flex-col justify-between">
+        <div className="absolute left-[466px] top-[170px] w-[387px] h-[159px] rounded-[24px] bg-[#6843ec] p-[21px] text-white shadow-xl flex flex-col justify-between">
           <h3 className="font-[family-name:var(--font-darker)] text-[29px] font-bold leading-tight text-white">
             We have the best AI image generator
           </h3>
 
-          <div className="mt-2 flex items-center gap-3">
-            {/* Overlapping Avatars with #d2ff3a border */}
-            <div className="flex -space-x-3.5">
+          <div className="mt-2 flex items-center gap-2">
+            {/* Overlapping Avatars with #d2ff3a border (Pen: gap -16px) */}
+            <div className="flex -space-x-4">
               {avatars.map((url, i) => (
                 <img
                   key={i}
@@ -120,9 +120,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* 4. Group 16: Abstract Geometric Card (x: 839, y: 0, w: 423, h: 208) */}
+        {/* 4. Group 16: Abstract Geometric Card (x: 866, y: 12, w: 423, h: 208) */}
         <div
-          className="absolute left-[839px] top-0 w-[423px] h-[208px] rounded-[35px] overflow-hidden shadow-xl"
+          className="absolute left-[866px] top-[12px] w-[423px] h-[208px] rounded-[35px] overflow-hidden shadow-xl"
           style={{
             background:
               'linear-gradient(180deg, #6843ec 0%, rgba(41, 41, 41, 0.2) 100%)',
@@ -134,39 +134,39 @@ export function Hero() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* White Triangle */}
+            {/* White Triangle (Pen: x: 116 - 27 = 89, y: 94 - 12 = 82) */}
             <path
               d="M155.019 0l155.01899 268.5-310.03799 0 155.019-268.5z"
               fill="#ffffff"
-              transform="translate(100, 70) scale(0.48)"
+              transform="translate(89, 82) scale(0.4691)"
             />
 
-            {/* Lime Plus/Cross */}
-            <g transform="translate(290, 85) rotate(102.9) scale(0.55)">
+            {/* Lime Cross (Pen: x: 283.7 - 27 = 256.7, y: 208.8 - 12 = 196.8, rot: 102.91°) */}
+            <g transform="translate(256.7, 196.8) rotate(102.91) scale(0.4007)">
               <path
                 d="M250 205c0-24.853-20.147-45-45-45-24.853 0-45 20.147-45 45 0 24.853 20.147 45 45 45 24.853 0 45-20.147 45-45z m-250 45l0-90 160 0 0-160 90 0 0 160 160 0 0 90-160 0 0 160-90 0 0-160-160 0z"
                 fill="#d2ff3a"
               />
             </g>
 
-            {/* Purple Circle */}
-            <circle cx="340" cy="140" r="18" fill="#6843ec" />
+            {/* Purple Circle (Pen: x: 301 - 27 = 274, y: 184 - 12 = 172) */}
+            <circle cx="292" cy="190" r="18" fill="#6843ec" />
 
-            {/* Dark Angular Accent */}
+            {/* Black Diagonal Bar (Pen: x: 119.7 - 27 = 92.7, y: 0 - 12 = -12, rot: -38.5°) */}
             <path
               d="M237 0l-90 0 0 74-147 0 0 90 147 0 0 246 90 0 0-410z"
               fill="#040c1f"
-              transform="translate(80, -10) rotate(-38.5) scale(0.4)"
+              transform="translate(92.7, -12) rotate(-38.5) scale(0.4691)"
             />
           </svg>
         </div>
 
-        {/* 5. Primary CTA Button: Try Free (x: 866, y: 230, w: 423, h: 99) */}
+        {/* 5. ctaButtonPrimary: Try Free Button (x: 866, y: 230, w: 423, h: 99) */}
         <a
           href="#try-free"
-          className="absolute left-[866px] top-[230px] w-[423px] h-[99px] rounded-[24px] bg-[#d2ff3a] flex items-center justify-center gap-3 text-black shadow-lg shadow-[#d2ff3a]/20"
+          className="absolute left-[866px] top-[230px] w-[423px] h-[99px] rounded-[24px] bg-[#d2ff3a] flex items-center justify-center gap-3 text-black shadow-lg shadow-[#d2ff3a]/10 cursor-pointer"
         >
-          <span className="font-[family-name:var(--font-work)] text-[32px] font-medium">
+          <span className="font-[family-name:var(--font-work)] text-[32px] font-medium leading-[1.01]">
             Try Free
           </span>
 
