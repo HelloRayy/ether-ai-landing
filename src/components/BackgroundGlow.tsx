@@ -33,14 +33,18 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. IMAGE.png positioned exactly per Pen design: x=-214, y=916, w=1740, h=1690 */}
-        <img
-          src="/assets/IMAGE.png"
-          alt=""
-          width={1740}
-          height={1690}
-          className="pointer-events-none absolute -left-[214px] top-[916px] h-[1690px] w-[1740px] max-w-none select-none mix-blend-screen"
-        />
+        {/* 2. High-resolution 2x WebP aurora ribbon: x=-214, y=916, w=1740, h=1690 */}
+        <picture>
+          <source srcSet="/assets/IMAGE@2x.webp" type="image/webp" />
+          <img
+            src="/assets/IMAGE.png"
+            alt=""
+            width={1740}
+            height={1690}
+            decoding="async"
+            className="pointer-events-none absolute -left-[214px] top-[916px] h-[1690px] w-[1740px] max-w-none select-none mix-blend-screen"
+          />
+        </picture>
       </div>
     </div>
   )
