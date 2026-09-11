@@ -6,6 +6,7 @@ import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { SectionCommunity } from './components/SectionCommunity'
 import { SectionImage } from './components/SectionImage'
+import { Footer } from './components/Footer'
 
 export default function App() {
   return (
@@ -25,6 +26,9 @@ export default function App() {
           <SectionCommunity />
           <SectionImage />
         </main>
+
+        {/* Full-width Footer */}
+        <Footer />
       </div>
     </ReactLenis>
   )

@@ -194,7 +194,7 @@ export function SectionImage() {
     <section
       id="gallery"
       aria-label="Journey Through Art of community"
-      className="relative z-10 -mx-6 mt-32 mb-40 overflow-hidden sm:-mx-10 lg:-mx-[99px]"
+      className="relative z-10 -mx-6 mt-32 mb-28 overflow-hidden sm:-mx-10 lg:-mx-[99px]"
     >
       {/* Section Title */}
       <div className="mx-auto mb-12 max-w-[1440px] px-6 text-center sm:px-10 lg:px-[99px]">
