@@ -33,7 +33,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="flex max-w-[367px] flex-col gap-4 self-start lg:self-end"
         >
-          <div className="font-[family-name:var(--font-darker)] text-3xl font-semibold tracking-wide sm:text-[41px]">
+          <div className="font-[family-name:var(--font-emoji)] text-3xl font-semibold tracking-wide text-white sm:text-[41px]">
             🔥😍👍
           </div>
           <p className="font-[family-name:var(--font-work)] text-sm font-normal text-white/90 leading-[1.92]">
