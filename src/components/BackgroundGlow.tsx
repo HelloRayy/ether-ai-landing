@@ -33,13 +33,13 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. Linear/Vercel-style diagonal filament ribbon connecting both feature cards */}
+        {/* 2. Linear/Vercel-style orbital ribbon encircling Card 2 and cascading downwards */}
         <img
           src="/assets/aurora.svg"
           alt=""
           width={1440}
-          height={700}
-          className="pointer-events-none absolute left-0 top-[1100px] h-[700px] w-[1440px] select-none mix-blend-screen"
+          height={1500}
+          className="pointer-events-none absolute left-0 top-[1100px] h-[1500px] w-[1440px] select-none mix-blend-screen"
         />
       </div>
     </div>
