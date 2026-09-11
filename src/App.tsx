@@ -1,5 +1,6 @@
 import { ReactLenis } from 'lenis/react'
 import { BackgroundGlow } from './components/BackgroundGlow'
+import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 
 export default function App() {
@@ -12,14 +13,15 @@ export default function App() {
         {/* Header / Navbar */}
         <Navbar />
 
-        {/* Main Content Placeholder for Slicing Subsequent Sections */}
+        {/* Main Content Sections */}
         <main className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-[99px]">
-          {/* Next slicing target: Hero Section */}
+          <Hero />
         </main>
       </div>
     </ReactLenis>
   )
 }
+
 
 
 
