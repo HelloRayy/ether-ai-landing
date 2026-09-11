@@ -1,16 +1,18 @@
 /**
- * Ellipse 32 from Pen Design (AI Generator Base Background)
- * Static atmospheric ambient glow.
+ * Background Elements from Pen Design:
+ * 1. Ellipse 32 (top purple ambient glow)
+ * 2. IMAGE (IMAGE.png: glowing ribbon/aurora background at y: 916px, x: -214px, w: 1740px, h: 1690px)
  */
 export function BackgroundGlow() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden"
-      style={{ height: '950px' }}
+      className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden select-none"
+      style={{ height: '3392px' }}
       aria-hidden="true"
     >
-      {/* Centered to the 1440px design canvas */}
+      {/* Centered 1440px canvas frame */}
       <div className="relative mx-auto h-full max-w-[1440px]">
+        {/* 1. Ellipse 32 Ambient Glow */}
         <div
           className="absolute -left-[500px] -top-[550px] h-[1200px] w-[1200px] rounded-full"
           style={{
@@ -27,6 +29,13 @@ export function BackgroundGlow() {
               'radial-gradient(circle at 50% 50%, rgba(115, 78, 245, 0.28) 0%, rgba(104, 67, 236, 0.14) 45%, rgba(0, 0, 0, 0) 75%)',
             filter: 'blur(80px)',
           }}
+        />
+
+        {/* 2. IMAGE: Glowing aurora ribbon (x: -214px, y: 916px, w: 1740px, h: 1690px) */}
+        <img
+          src="/assets/IMAGE.png"
+          alt=""
+          className="absolute -left-[214px] top-[916px] w-[1740px] h-[1690px] max-w-none pointer-events-none select-none object-cover opacity-100"
         />
       </div>
     </div>
