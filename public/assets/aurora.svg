@@ -1,75 +1,76 @@
 <svg width="1440" height="1400" viewBox="0 0 1440 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Refined Linear/Vercel Color Gradients (Subtle, Desaturated, Elegant) -->
-    <!-- Left Curve Gradient -->
-    <linearGradient id="leftCore" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Left Curve Gradient: Subtle violet to luminous lavender-white, fading to zero -->
+    <linearGradient id="leftCoreGrad" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#818cf8" stop-opacity="0"/>
-      <stop offset="20%" stop-color="#a78bfa" stop-opacity="0.7"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.9"/>
-      <stop offset="80%" stop-color="#818cf8" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#a78bfa" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="80%" stop-color="#c084fc" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
     </linearGradient>
 
-    <linearGradient id="leftGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="leftGlowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#6366f1" stop-opacity="0"/>
-      <stop offset="25%" stop-color="#7c3aed" stop-opacity="0.35"/>
-      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="30%" stop-color="#7c3aed" stop-opacity="0.35"/>
+      <stop offset="70%" stop-color="#8b5cf6" stop-opacity="0.3"/>
       <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Right Curve Gradient: Indigo -> Clean White -> Subtle Cyan -> Muted Emerald -->
-    <linearGradient id="rightCore" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"/>
-      <stop offset="10%" stop-color="#c084fc" stop-opacity="0.6"/>
+    <!-- Right Curve Gradient: Violet -> Cyan -> Emerald (Sophisticated luxury dark-mode) -->
+    <linearGradient id="rightCoreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#a855f7" stop-opacity="0.7"/>
       <stop offset="25%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="55%" stop-color="#67e8f9" stop-opacity="0.8"/>
-      <stop offset="85%" stop-color="#34d399" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="75%" stop-color="#34d399" stop-opacity="0.7"/>
+      <stop offset="90%" stop-color="#10b981" stop-opacity="0.4"/>
       <stop offset="100%" stop-color="#059669" stop-opacity="0"/>
     </linearGradient>
 
-    <linearGradient id="rightGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="rightGlowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#7c3aed" stop-opacity="0"/>
-      <stop offset="12%" stop-color="#8b5cf6" stop-opacity="0.32"/>
-      <stop offset="35%" stop-color="#06b6d4" stop-opacity="0.30"/>
-      <stop offset="70%" stop-color="#10b981" stop-opacity="0.22"/>
+      <stop offset="12%" stop-color="#9333ea" stop-opacity="0.35"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.35"/>
+      <stop offset="70%" stop-color="#059669" stop-opacity="0.28"/>
       <stop offset="100%" stop-color="#047857" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Refined, Performance-Friendly Filters (Narrow radii to eliminate heavy blurs) -->
-    <filter id="glow-subtle" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
+    <!-- Refined, Tight Optical Glow Filters -->
+    <filter id="glow-ambient-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
     </filter>
-    <filter id="glow-crisp" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+    <filter id="glow-crisp-inner" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
     </filter>
   </defs>
 
-  <!-- Ambient Depth Vignettes (Very low opacity 8-10%, non-intrusive) -->
-  <circle cx="1180" cy="350" r="260" fill="#6366f1" opacity="0.07" filter="url(#glow-subtle)"/>
-  <circle cx="1340" cy="650" r="220" fill="#06b6d4" opacity="0.06" filter="url(#glow-subtle)"/>
-  <circle cx="220" cy="600" r="240" fill="#7c3aed" opacity="0.06" filter="url(#glow-subtle)"/>
+  <!-- Non-intrusive, Whisper-soft Ambient Background Tint -->
+  <circle cx="1340" cy="520" r="280" fill="#6366f1" opacity="0.06" filter="url(#glow-ambient-soft)"/>
+  <circle cx="1360" cy="820" r="260" fill="#06b6d4" opacity="0.05" filter="url(#glow-ambient-soft)"/>
+  <circle cx="180" cy="620" r="240" fill="#7c3aed" opacity="0.05" filter="url(#glow-ambient-soft)"/>
 
+  <!-- Flowing Waves (No closed loops, natural sweeping curves) -->
   <g>
-    <!-- Left Filament (Smooth curve framing left margin & community header) -->
-    <!-- Ambient aura -->
-    <path d="M 40 380 C 80 470 120 540 180 580 C 230 615 270 600 300 520 C 320 460 310 390 280 320"
-          stroke="url(#leftGlow)" stroke-width="22" stroke-linecap="round" filter="url(#glow-subtle)"/>
-    <!-- Crisp mid-glow -->
-    <path d="M 40 380 C 80 470 120 540 180 580 C 230 615 270 600 300 520 C 320 460 310 390 280 320"
-          stroke="url(#leftCore)" stroke-width="4" stroke-linecap="round" filter="url(#glow-crisp)"/>
-    <!-- Ultra-thin 1px core filament -->
-    <path d="M 40 380 C 80 470 120 540 180 580 C 230 615 270 600 300 520 C 320 460 310 390 280 320"
-          stroke="url(#leftCore)" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- Left Open Wave: Sweeps from left bottom, rising gracefully to frame the Community heading -->
+    <!-- Ambient mist -->
+    <path d="M -40 780 C 30 740 75 660 105 560 C 130 450 135 350 140 220"
+          stroke="url(#leftGlowGrad)" stroke-width="32" stroke-linecap="round" filter="url(#glow-ambient-soft)"/>
+    <!-- Halo -->
+    <path d="M -40 780 C 30 740 75 660 105 560 C 130 450 135 350 140 220"
+          stroke="url(#leftCoreGrad)" stroke-width="7" stroke-linecap="round" filter="url(#glow-crisp-inner)"/>
+    <!-- Core Filament 1.2px -->
+    <path d="M -40 780 C 30 740 75 660 105 560 C 130 450 135 350 140 220"
+          stroke="url(#leftCoreGrad)" stroke-width="1.2" stroke-linecap="round"/>
 
-    <!-- Right Filament (Natural sweep emerging from Card 2, framing stats) -->
-    <!-- Ambient aura -->
-    <path d="M 820 160 C 940 220 1100 280 1210 340 C 1310 390 1370 470 1360 580 C 1350 670 1290 770 1200 840 C 1110 910 980 960 840 990"
-          stroke="url(#rightGlow)" stroke-width="26" stroke-linecap="round" filter="url(#glow-subtle)"/>
-    <!-- Crisp mid-glow -->
-    <path d="M 820 160 C 940 220 1100 280 1210 340 C 1310 390 1370 470 1360 580 C 1350 670 1290 770 1200 840 C 1110 910 980 960 840 990"
-          stroke="url(#rightCore)" stroke-width="4.5" stroke-linecap="round" filter="url(#glow-crisp)"/>
-    <!-- Ultra-thin 1px core filament -->
-    <path d="M 820 160 C 940 220 1100 280 1210 340 C 1310 390 1370 470 1360 580 C 1350 670 1290 770 1200 840 C 1110 910 980 960 840 990"
-          stroke="url(#rightCore)" stroke-width="1.25" stroke-linecap="round"/>
+    <!-- Right Open Wave: Emerges from Card 2, arcs out, cascades down the right flank of statistics -->
+    <!-- Ambient mist -->
+    <path d="M 1080 340 C 1180 390 1280 430 1340 500 C 1400 570 1410 680 1400 800 C 1390 920 1350 1020 1280 1120 C 1220 1200 1140 1260 1060 1300"
+          stroke="url(#rightGlowGrad)" stroke-width="36" stroke-linecap="round" filter="url(#glow-ambient-soft)"/>
+    <!-- Halo -->
+    <path d="M 1080 340 C 1180 390 1280 430 1340 500 C 1400 570 1410 680 1400 800 C 1390 920 1350 1020 1280 1120 C 1220 1200 1140 1260 1060 1300"
+          stroke="url(#rightCoreGrad)" stroke-width="8" stroke-linecap="round" filter="url(#glow-crisp-inner)"/>
+    <!-- Core Filament 1.25px -->
+    <path d="M 1080 340 C 1180 390 1280 430 1340 500 C 1400 570 1410 680 1400 800 C 1390 920 1350 1020 1280 1120 C 1220 1200 1140 1260 1060 1300"
+          stroke="url(#rightCoreGrad)" stroke-width="1.25" stroke-linecap="round"/>
   </g>
 </svg>

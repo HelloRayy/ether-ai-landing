@@ -33,13 +33,13 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. Linear/Vercel-style refined filament lighting (Centered on 1440px canvas, top: 1050px) */}
+        {/* 2. Linear/Vercel-style refined filament lighting (Centered on 1440px canvas, top: 1120px) */}
         <img
           src="/assets/aurora.svg"
           alt=""
           width={1440}
           height={1400}
-          className="pointer-events-none absolute left-0 top-[1050px] h-[1400px] w-[1440px] select-none mix-blend-screen"
+          className="pointer-events-none absolute left-0 top-[1120px] h-[1400px] w-[1440px] select-none mix-blend-screen"
         />
       </div>
     </div>
