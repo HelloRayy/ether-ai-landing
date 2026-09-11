@@ -1,5 +1,6 @@
 import { ReactLenis } from 'lenis/react'
 import { BackgroundGlow } from './components/BackgroundGlow'
+import { ContainerImageLogo } from './components/ContainerImageLogo'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 
@@ -16,6 +17,7 @@ export default function App() {
         {/* Main Content Sections */}
         <main className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-[99px]">
           <Hero />
+          <ContainerImageLogo />
         </main>
       </div>
     </ReactLenis>
