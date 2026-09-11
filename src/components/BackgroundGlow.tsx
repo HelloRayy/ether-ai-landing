@@ -1,9 +1,9 @@
-import { AuroraRibbon } from './AuroraRibbon'
-
 /**
  * Background Elements from Pen Design:
  * 1. Ellipse 32 (top purple ambient glow)
- * 2. Vector Aurora Ribbon (replaces low-res raster IMAGE.png with 100% crisp vector SVG gradient glow)
+ * 2. IMAGE (IMAGE.png: glowing ribbon/aurora at y: 916px)
+ *    Rendered with native 1440x1690 dimensions and mix-blend-mode: screen
+ *    to preserve 1:1 pixel sharpness without horizontal stretching or banding.
  */
 export function BackgroundGlow() {
   return (
@@ -33,10 +33,14 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. Vector Aurora Ribbon (100% Crisp SVG - zero pixelation or compression artifacts) */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-[916px] w-[1440px] h-[1690px] pointer-events-none">
-          <AuroraRibbon />
-        </div>
+        {/* 2. IMAGE.png positioned exactly per Pen design: x=-214, y=916, w=1740, h=1690 */}
+        <img
+          src="/assets/IMAGE.png"
+          alt=""
+          width={1740}
+          height={1690}
+          className="pointer-events-none absolute -left-[214px] top-[916px] h-[1690px] w-[1740px] max-w-none select-none mix-blend-screen"
+        />
       </div>
     </div>
   )

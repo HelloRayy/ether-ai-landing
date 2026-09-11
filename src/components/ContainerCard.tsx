@@ -2,7 +2,8 @@ export function ContainerCard() {
   return (
     <section
       aria-label="Features and synthesis tools"
-      className="relative z-10 mx-auto mt-28 mb-32 flex w-full max-w-[1084px] flex-col items-center justify-center gap-6 lg:flex-row"
+      style={{ marginTop: '74px' }}
+      className="relative z-10 mx-auto mb-32 flex w-full max-w-[1084px] flex-col items-center justify-center gap-6 lg:flex-row"
     >
       {/* Card 1: Automated Image Synthesis and Design (530x357 in Pen) */}
       <div className="relative flex h-[357px] w-full max-w-[530px] flex-col justify-between rounded-[14px] bg-[#19161c] px-7 py-8 shadow-[0_58px_70px_rgba(0,0,0,0.16)] sm:px-[44px] sm:pt-[42px] sm:pb-[40px]">
