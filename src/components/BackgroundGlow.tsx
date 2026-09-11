@@ -33,13 +33,13 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. Pure Vector Aurora Ribbon (100% HD SVG at exact Pen coordinates: x=-214, y=916, w=1740, h=1690) */}
+        {/* 2. Linear/Vercel-style refined filament lighting (Centered on 1440px canvas, top: 1050px) */}
         <img
           src="/assets/aurora.svg"
           alt=""
-          width={1740}
-          height={1690}
-          className="pointer-events-none absolute -left-[214px] top-[916px] h-[1690px] w-[1740px] max-w-none select-none mix-blend-screen"
+          width={1440}
+          height={1400}
+          className="pointer-events-none absolute left-0 top-[1050px] h-[1400px] w-[1440px] select-none mix-blend-screen"
         />
       </div>
     </div>
