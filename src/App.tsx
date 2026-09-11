@@ -4,12 +4,13 @@ import { ContainerCard } from './components/ContainerCard'
 import { ContainerImageLogo } from './components/ContainerImageLogo'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
+import { SectionCommunity } from './components/SectionCommunity'
 
 export default function App() {
   return (
     <ReactLenis root>
       <div className="relative min-h-screen w-full overflow-x-clip bg-black text-white antialiased selection:bg-[#6843ec] selection:text-white">
-        {/* Background Atmosphere & IMAGE.png */}
+        {/* Background Atmosphere & Lighting */}
         <BackgroundGlow />
 
         {/* Header / Navbar */}
@@ -20,6 +21,7 @@ export default function App() {
           <Hero />
           <ContainerImageLogo />
           <ContainerCard />
+          <SectionCommunity />
         </main>
       </div>
     </ReactLenis>
