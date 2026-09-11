@@ -1,7 +1,9 @@
+import { AuroraRibbon } from './AuroraRibbon'
+
 /**
  * Background Elements from Pen Design:
  * 1. Ellipse 32 (top purple ambient glow)
- * 2. IMAGE (IMAGE.png: glowing ribbon/aurora background at y: 916px, x: -214px, w: 1740px, h: 1690px)
+ * 2. Vector Aurora Ribbon (replaces low-res raster IMAGE.png with 100% crisp vector SVG gradient glow)
  */
 export function BackgroundGlow() {
   return (
@@ -31,12 +33,10 @@ export function BackgroundGlow() {
           }}
         />
 
-        {/* 2. IMAGE: Glowing aurora ribbon (x: -214px, y: 916px, w: 1740px, h: 1690px) */}
-        <img
-          src="/assets/IMAGE.png"
-          alt=""
-          className="absolute -left-[214px] top-[916px] w-[1740px] h-[1690px] max-w-none pointer-events-none select-none object-cover opacity-100"
-        />
+        {/* 2. Vector Aurora Ribbon (100% Crisp SVG - zero pixelation or compression artifacts) */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-[916px] w-[1440px] h-[1690px] pointer-events-none">
+          <AuroraRibbon />
+        </div>
       </div>
     </div>
   )
