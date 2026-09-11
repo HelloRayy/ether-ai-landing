@@ -5,6 +5,7 @@ import { ContainerImageLogo } from './components/ContainerImageLogo'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { SectionCommunity } from './components/SectionCommunity'
+import { SectionImage } from './components/SectionImage'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <ContainerImageLogo />
           <ContainerCard />
           <SectionCommunity />
+          <SectionImage />
         </main>
       </div>
     </ReactLenis>
