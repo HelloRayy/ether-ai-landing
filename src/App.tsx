@@ -6,7 +6,7 @@ import { Navbar } from './components/Navbar'
 export default function App() {
   return (
     <ReactLenis root>
-      <div className="relative min-h-screen w-full overflow-x-hidden bg-black text-white antialiased selection:bg-[#6843ec] selection:text-white">
+      <div className="relative min-h-screen w-full overflow-x-clip bg-black text-white antialiased selection:bg-[#6843ec] selection:text-white">
         {/* Ellipse 32 Ambient Glow */}
         <BackgroundGlow />
 
