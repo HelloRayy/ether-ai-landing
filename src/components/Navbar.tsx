@@ -1,24 +1,73 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { EASE_EXPO } from './motion/MotionReveal'
+
+interface DropdownSubItem {
+  title: string
+  description: string
+  href: string
+}
 
 interface NavItem {
   name: string
   href: string
   fontSize?: string
+  dropdownItems: DropdownSubItem[]
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: 'Learn', href: '#learn', fontSize: 'text-[17px]' },
-  { name: 'Build', href: '#build', fontSize: 'text-[17px]' },
-  { name: 'Product', href: '#product', fontSize: 'text-[18px]' },
-  { name: 'Community', href: '#community', fontSize: 'text-[17px]' },
+  {
+    name: 'Learn',
+    href: '#learn',
+    fontSize: 'text-[17px]',
+    dropdownItems: [
+      { title: 'Documentation', description: 'Guides, prompts & system overview', href: '#learn' },
+      { title: 'Tutorials', description: 'Step-by-step generative AI workflows', href: '#tutorials' },
+      { title: 'SDK Reference', description: 'Client libraries for JS & Python', href: '#sdk' },
+      { title: 'Research', description: 'Diffusion models & neural architecture', href: '#research' },
+    ],
+  },
+  {
+    name: 'Build',
+    href: '#build',
+    fontSize: 'text-[17px]',
+    dropdownItems: [
+      { title: 'Image Generator', description: 'High-throughput studio generator', href: '#generator' },
+      { title: 'Model Training', description: 'Train custom LoRAs & visual styles', href: '#training' },
+      { title: 'Solana APIs', description: 'On-chain proof of generation', href: '#solana' },
+      { title: 'CLI Pipeline', description: 'Automate rendering scripts locally', href: '#cli' },
+    ],
+  },
+  {
+    name: 'Product',
+    href: '#product',
+    fontSize: 'text-[18px]',
+    dropdownItems: [
+      { title: 'Overview', description: 'Core generation tools & live canvas', href: '#product' },
+      { title: 'Enterprise', description: 'Dedicated GPU clusters & custom SLA', href: '#enterprise' },
+      { title: 'Showcase', description: 'Curated community creations', href: '#gallery' },
+      { title: 'Changelog', description: 'Recent enhancements and model updates', href: '#changelog' },
+    ],
+  },
+  {
+    name: 'Community',
+    href: '#community',
+    fontSize: 'text-[17px]',
+    dropdownItems: [
+      { title: 'Discord', description: 'Join 30,000+ creators & researchers', href: 'https://discord.com' },
+      { title: 'Governance Forum', description: 'Vote on protocol upgrades and grants', href: '#community' },
+      { title: 'Grants Program', description: 'Funding creative AI tooling', href: '#grants' },
+      { title: 'GitHub', description: 'Open-source SDKs and examples', href: 'https://github.com' },
+    ],
+  },
 ]
 
-function ChevronIcon() {
+function ChevronIcon({ isOpen }: { isOpen?: boolean }) {
   return (
     <svg
-      className="h-[8px] w-[14px] shrink-0 fill-current text-white/70 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-white"
+      className={`h-[8px] w-[14px] shrink-0 fill-current text-white/70 transition-transform duration-300 ${
+        isOpen ? 'rotate-180 text-white' : 'group-hover:translate-y-0.5 group-hover:text-white'
+      }`}
       viewBox="0 0 15 9"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +84,26 @@ function ChevronIcon() {
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleMouseEnter = (name: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setActiveDropdown(name)
+  }
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 150)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
 
   return (
     <motion.header
@@ -54,23 +123,86 @@ export function Navbar() {
         {/* Desktop Navlinks */}
         <nav className="hidden items-center md:flex" aria-label="Main Navigation">
           <ul className="flex items-center gap-6 lg:gap-9">
-            {NAV_ITEMS.map((item, idx) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 + idx * 0.06, ease: EASE_EXPO }}
-              >
-                <a
-                  href={item.href}
-                  className={`group relative inline-flex items-center gap-2 font-[family-name:var(--font-work)] ${item.fontSize} font-normal text-white/80 transition-colors duration-200 hover:text-white`}
+            {NAV_ITEMS.map((item, idx) => {
+              const isOpen = activeDropdown === item.name
+
+              return (
+                <motion.li
+                  key={item.name}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 + idx * 0.06, ease: EASE_EXPO }}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(item.name)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  <span>{item.name}</span>
-                  <ChevronIcon />
-                  <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-white/40 transition-all duration-300 group-hover:w-full" />
-                </a>
-              </motion.li>
-            ))}
+                  <a
+                    href={item.href}
+                    onClick={() => {
+                      // Toggle dropdown if clicked
+                      setActiveDropdown(isOpen ? null : item.name)
+                    }}
+                    className={`group relative inline-flex items-center gap-2 font-[family-name:var(--font-work)] ${item.fontSize} font-normal text-white/80 transition-colors duration-200 hover:text-white py-1`}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                  >
+                    <span>{item.name}</span>
+                    <ChevronIcon isOpen={isOpen} />
+
+                    {/* Left-to-right animated underline */}
+                    <span
+                      className={`absolute -bottom-0.5 left-0 h-[1.5px] w-full bg-white origin-left transition-transform duration-300 ease-out ${
+                        isOpen ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-80 group-hover:scale-x-100'
+                      }`}
+                    />
+                  </a>
+
+                  {/* Dropdown Menu Modal / Panel */}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                        transition={{ duration: 0.2, ease: EASE_EXPO }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 w-[300px]"
+                      >
+                        <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d11]/95 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-2xl ring-1 ring-white/10">
+                          <div className="flex flex-col gap-0.5">
+                            {item.dropdownItems.map((sub) => (
+                              <a
+                                key={sub.title}
+                                href={sub.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className="group/item flex flex-col rounded-xl px-3.5 py-2.5 transition-all duration-150 hover:bg-white/[0.08] focus:bg-white/[0.08] focus:outline-none"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="font-[family-name:var(--font-work)] text-[14px] font-medium text-white transition-colors group-hover/item:text-[#d2ff3a]">
+                                    {sub.title}
+                                  </span>
+                                  <svg
+                                    className="h-3 w-3 text-white/30 transition-all duration-200 group-hover/item:translate-x-0.5 group-hover/item:text-white"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                  >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                  </svg>
+                                </div>
+                                <span className="font-[family-name:var(--font-work)] text-[11.5px] text-white/45 transition-colors group-hover/item:text-white/70">
+                                  {sub.description}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.li>
+              )
+            })}
           </ul>
         </nav>
 
@@ -110,7 +242,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu with Expandable Accordions */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -120,19 +252,50 @@ export function Navbar() {
             transition={{ duration: 0.3, ease: EASE_EXPO }}
             className="overflow-hidden border-b border-white/10 bg-black/95 backdrop-blur-xl px-6 py-4 md:hidden"
           >
-            <ul className="space-y-3">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between py-2 font-[family-name:var(--font-work)] text-lg text-white"
-                  >
-                    <span>{item.name}</span>
-                    <ChevronIcon />
-                  </a>
-                </li>
-              ))}
+            <ul className="space-y-2">
+              {NAV_ITEMS.map((item) => {
+                const isExpanded = mobileExpanded === item.name
+
+                return (
+                  <li key={item.name} className="border-b border-white/5 pb-2">
+                    <button
+                      type="button"
+                      onClick={() => setMobileExpanded(isExpanded ? null : item.name)}
+                      className="flex w-full items-center justify-between py-2 font-[family-name:var(--font-work)] text-lg text-white"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronIcon isOpen={isExpanded} />
+                    </button>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="pl-3 pr-1 py-2 flex flex-col gap-2"
+                        >
+                          {item.dropdownItems.map((sub) => (
+                            <a
+                              key={sub.title}
+                              href={sub.href}
+                              onClick={() => {
+                                setMobileMenuOpen(false)
+                                setMobileExpanded(null)
+                              }}
+                              className="flex flex-col py-1 text-sm text-white/70 hover:text-white"
+                            >
+                              <span className="font-medium text-white">{sub.title}</span>
+                              <span className="text-xs text-white/40">{sub.description}</span>
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </li>
+                )
+              })}
             </ul>
           </motion.div>
         )}
