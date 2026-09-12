@@ -42,7 +42,7 @@ export function SectionCommunity() {
     >
       {/* Left Column: Frame 109 with Sticky Behavior & Masked Title Reveal */}
       <div className="sticky top-28 self-start w-full max-w-[420px] shrink-0 pt-2">
-        <h2 className="font-[family-name:var(--font-darker)] text-[54px] sm:text-[60px] font-normal leading-[0.88] tracking-[1px] text-white">
+        <h2 className="font-[family-name:var(--font-darker)] text-[54px] sm:text-[60px] font-normal leading-[0.98] tracking-[1px] text-white">
           <MaskedTextReveal delay={0.1}>
             Join a community
           </MaskedTextReveal>

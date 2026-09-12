@@ -1,4 +1,4 @@
-import { motion, type HTMLMotionProps } from 'motion/react'
+import { motion, useInView, type HTMLMotionProps } from 'motion/react'
 import React from 'react'
 
 export const EASE_EXPO = [0.16, 1, 0.3, 1] as const
@@ -59,16 +59,17 @@ export function MaskedTextReveal({
   duration = 0.85,
   trigger = 'scroll',
 }: MaskedTextRevealProps) {
+  const ref = React.useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.05, margin: '0px 0px 50px 0px' })
   const isLoad = trigger === 'load'
+  const shouldAnimate = isLoad || isInView
 
   return (
-    <span className={`inline-block overflow-hidden align-top ${className}`}>
+    <span ref={ref} className={`inline-block overflow-hidden align-top py-0.5 ${className}`}>
       <motion.span
         className="inline-block"
         initial={{ y: '115%' }}
-        {...(isLoad
-          ? { animate: { y: '0%' } }
-          : { whileInView: { y: '0%' }, viewport: { once: true, amount: 0.1 } })}
+        animate={shouldAnimate ? { y: '0%' } : { y: '115%' }}
         transition={{
           duration,
           delay,
