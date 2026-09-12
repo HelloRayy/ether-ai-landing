@@ -14,8 +14,7 @@
 }
 
 html {
-  overflow-x: clip;
-  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -23,8 +22,6 @@ body {
   min-height: 100vh;
   background-color: #000000;
   color: #ffffff;
-  overflow-x: clip;
-  overflow-y: visible;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

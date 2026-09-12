@@ -30,7 +30,7 @@ export function MotionReveal({
       initial={{ opacity: 0, y: yOffset }}
       {...(isLoad
         ? { animate: { opacity: 1, y: 0 } }
-        : { whileInView: { opacity: 1, y: 0 }, viewport: { once, margin: '-40px' } })}
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once, amount: 0.05, margin: '0px 0px 50px 0px' } })}
       transition={{
         duration,
         delay,
@@ -65,10 +65,10 @@ export function MaskedTextReveal({
     <span className={`inline-block overflow-hidden align-top ${className}`}>
       <motion.span
         className="inline-block"
-        initial={{ y: '115%', opacity: 0 }}
+        initial={{ y: '115%' }}
         {...(isLoad
-          ? { animate: { y: '0%', opacity: 1 } }
-          : { whileInView: { y: '0%', opacity: 1 }, viewport: { once: true, margin: '-40px' } })}
+          ? { animate: { y: '0%' } }
+          : { whileInView: { y: '0%' }, viewport: { once: true, amount: 0.1 } })}
         transition={{
           duration,
           delay,
@@ -104,7 +104,7 @@ export function StaggerContainer({
       initial="hidden"
       {...(isLoad
         ? { animate: 'visible' }
-        : { whileInView: 'visible', viewport: { once: true, margin: '-40px' } })}
+        : { whileInView: 'visible', viewport: { once: true, amount: 0.05, margin: '0px 0px 50px 0px' } })}
       variants={{
         hidden: {},
         visible: {

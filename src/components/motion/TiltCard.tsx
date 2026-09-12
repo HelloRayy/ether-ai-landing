@@ -16,10 +16,16 @@ export function TiltCard({
   ...props
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const [canHover, setCanHover] = useState(false)
+  const [canHover, setCanHover] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  })
 
   useEffect(() => {
-    setCanHover(window.matchMedia('(hover: hover) and (pointer: fine)').matches)
+    const mql = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const handler = (e: MediaQueryListEvent) => setCanHover(e.matches)
+    mql.addEventListener('change', handler)
+    return () => mql.removeEventListener('change', handler)
   }, [])
 
   const mouseX = useMotionValue(0)
@@ -36,6 +42,13 @@ export function TiltCard({
   // Specular reflection position
   const shineX = useTransform(smoothX, [-0.5, 0.5], ['0%', '100%'])
   const shineY = useTransform(smoothY, [-0.5, 0.5], ['0%', '100%'])
+
+  // Dynamic Specular Lighting Sheen gradient (called unconditionally at top level)
+  const shineBackground = useTransform(
+    [shineX, shineY],
+    ([x, y]) =>
+      `radial-gradient(circle 320px at ${x} ${y}, rgba(255, 255, 255, ${shineOpacity}), transparent 70%)`
+  )
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || !canHover) return
@@ -74,13 +87,7 @@ export function TiltCard({
       {canHover && (
         <motion.div
           className="pointer-events-none absolute inset-0 z-30 rounded-[inherit] overflow-hidden transition-opacity duration-300"
-          style={{
-            background: useTransform(
-              [shineX, shineY],
-              ([x, y]) =>
-                `radial-gradient(circle 320px at ${x} ${y}, rgba(255, 255, 255, ${shineOpacity}), transparent 70%)`
-            ),
-          }}
+          style={{ background: shineBackground }}
           aria-hidden="true"
         />
       )}
