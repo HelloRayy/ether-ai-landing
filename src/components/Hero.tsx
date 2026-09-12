@@ -19,15 +19,17 @@ export function Hero() {
       {/* Hero Top: Headline + Description Block */}
       <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
         {/* Main Title with Masked Line Reveals */}
-        <h1 className="max-w-[840px] font-[family-name:var(--font-darker)] text-5xl font-semibold tracking-tight text-white leading-[1.08] sm:text-6xl md:text-7xl lg:text-[82px]">
+        <h1 className="font-[family-name:var(--font-darker)] text-5xl font-semibold tracking-tight text-white leading-[1.04] sm:text-6xl md:text-7xl lg:text-[82px]">
           <MaskedTextReveal trigger="load" delay={0.1} duration={0.9}>
             Harnessing Artificial
-          </MaskedTextReveal>{' '}
+          </MaskedTextReveal>
+          <br />
           <MaskedTextReveal trigger="load" delay={0.2} duration={0.9}>
-            Intelligence Tools for Naturally
-          </MaskedTextReveal>{' '}
-          <MaskedTextReveal trigger="load" delay={0.3} duration={0.9}>
-            Image Generator
+            Intelligence Tools for
+          </MaskedTextReveal>
+          <br />
+          <MaskedTextReveal trigger="load" delay={0.3} duration={0.9} className="whitespace-nowrap">
+            Naturally Image Generator
           </MaskedTextReveal>
         </h1>
 
