@@ -1,3 +1,6 @@
+import { motion } from 'motion/react'
+import { MotionReveal, StaggerContainer, staggerItemVariants } from './motion/MotionReveal'
+
 interface PartnerLogo {
   id: string
   name: string
@@ -23,16 +26,24 @@ export function ContainerImageLogo() {
       className="relative mx-auto mt-9 w-full max-w-[1443px] flex flex-col items-center justify-center"
     >
       {/* Label / Heading */}
-      <h2 className="font-[family-name:var(--font-darker)] text-[22px] font-semibold leading-[18px] tracking-[0.8px] text-[#6843ec] text-center">
-        Powering tools and integrations from companies all around the world
-      </h2>
+      <MotionReveal yOffset={20} duration={0.7}>
+        <h2 className="font-[family-name:var(--font-darker)] text-[22px] font-semibold leading-[18px] tracking-[0.8px] text-[#6843ec] text-center">
+          Powering tools and integrations from companies all around the world
+        </h2>
+      </MotionReveal>
 
-      {/* Logos Strip */}
-      <div className="mt-8 flex w-full flex-wrap items-center justify-center gap-8 px-4 sm:gap-10 sm:px-12 xl:flex-nowrap">
+      {/* Logos Strip with Choreographed Stagger */}
+      <StaggerContainer
+        staggerChildren={0.06}
+        delayChildren={0.15}
+        className="mt-8 flex w-full flex-wrap items-center justify-center gap-8 px-4 sm:gap-10 sm:px-12 xl:flex-nowrap"
+      >
         {PARTNER_LOGOS.map((logo) => (
-          <div
+          <motion.div
             key={logo.id}
-            className="flex h-[38px] items-center justify-center shrink-0"
+            variants={staggerItemVariants}
+            whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            className="flex h-[38px] items-center justify-center shrink-0 cursor-default opacity-70 transition-opacity duration-300 hover:opacity-100"
             style={{ width: `${logo.width}px` }}
           >
             <img
@@ -43,9 +54,9 @@ export function ContainerImageLogo() {
               loading="lazy"
               className="max-h-full max-w-full object-contain pointer-events-none select-none"
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </StaggerContainer>
     </section>
   )
 }

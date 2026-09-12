@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { EASE_EXPO } from './motion/MotionReveal'
 
 interface NavItem {
   name: string
@@ -16,7 +18,7 @@ const NAV_ITEMS: NavItem[] = [
 function ChevronIcon() {
   return (
     <svg
-      className="h-[8px] w-[14px] shrink-0 fill-current text-white"
+      className="h-[8px] w-[14px] shrink-0 fill-current text-white/70 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-white"
       viewBox="0 0 15 9"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
@@ -35,28 +37,39 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="relative z-40 w-full pt-[32px] sm:pt-[45px]">
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: EASE_EXPO }}
+      className="relative z-40 w-full pt-[32px] sm:pt-[45px]"
+    >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-[99px]">
         {/* Logo: "Ether", Turret Road 36px Bold */}
-        <a href="/" className="inline-flex items-center">
-          <span className="font-[family-name:var(--font-turret)] text-[32px] sm:text-[36px] font-bold tracking-tight text-white">
+        <a href="/" className="group inline-flex items-center">
+          <span className="font-[family-name:var(--font-turret)] text-[32px] font-bold tracking-tight text-white transition-opacity duration-300 group-hover:opacity-85 sm:text-[36px]">
             Ether
           </span>
         </a>
 
-        {/* Desktop Navlinks (Width: 467px in Pen Design) */}
+        {/* Desktop Navlinks */}
         <nav className="hidden items-center md:flex" aria-label="Main Navigation">
           <ul className="flex items-center gap-6 lg:gap-9">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.name}>
+            {NAV_ITEMS.map((item, idx) => (
+              <motion.li
+                key={item.name}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 + idx * 0.06, ease: EASE_EXPO }}
+              >
                 <a
                   href={item.href}
-                  className={`inline-flex items-center gap-2 font-[family-name:var(--font-work)] ${item.fontSize} font-normal text-white`}
+                  className={`group relative inline-flex items-center gap-2 font-[family-name:var(--font-work)] ${item.fontSize} font-normal text-white/80 transition-colors duration-200 hover:text-white`}
                 >
                   <span>{item.name}</span>
                   <ChevronIcon />
+                  <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-white/40 transition-all duration-300 group-hover:w-full" />
                 </a>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </nav>
@@ -66,7 +79,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors duration-200 hover:bg-white/10 focus:outline-none"
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
           >
@@ -98,24 +111,32 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-b border-white/10 bg-black px-6 py-4 md:hidden">
-          <ul className="space-y-3">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2 font-[family-name:var(--font-work)] text-lg text-white"
-                >
-                  <span>{item.name}</span>
-                  <ChevronIcon />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </header>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: EASE_EXPO }}
+            className="overflow-hidden border-b border-white/10 bg-black/95 backdrop-blur-xl px-6 py-4 md:hidden"
+          >
+            <ul className="space-y-3">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-2 font-[family-name:var(--font-work)] text-lg text-white"
+                  >
+                    <span>{item.name}</span>
+                    <ChevronIcon />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }

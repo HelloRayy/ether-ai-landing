@@ -1,3 +1,7 @@
+import { motion } from 'motion/react'
+import { MaskedTextReveal, EASE_EXPO } from './motion/MotionReveal'
+import { TiltCard } from './motion/TiltCard'
+
 export function Hero() {
   const avatars = [
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
@@ -14,16 +18,34 @@ export function Hero() {
     <section className="relative z-20 pt-16 pb-24">
       {/* Hero Top: Headline + Description Block */}
       <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-        {/* Main Title (840px in design, Darker Grotesque 82px 600) */}
+        {/* Main Title with Masked Line Reveals */}
         <h1 className="max-w-[840px] font-[family-name:var(--font-darker)] text-5xl font-semibold tracking-tight text-white leading-[1.08] sm:text-6xl md:text-7xl lg:text-[82px]">
-          Harnessing Artificial Intelligence Tools for Naturally Image Generator
+          <MaskedTextReveal trigger="load" delay={0.1} duration={0.9}>
+            Harnessing Artificial
+          </MaskedTextReveal>{' '}
+          <MaskedTextReveal trigger="load" delay={0.2} duration={0.9}>
+            Intelligence Tools for Naturally
+          </MaskedTextReveal>{' '}
+          <MaskedTextReveal trigger="load" delay={0.3} duration={0.9}>
+            Image Generator
+          </MaskedTextReveal>
         </h1>
 
-        {/* Frame 103: Emojis + Paragraph (367px in design) */}
-        <div className="flex max-w-[367px] flex-col gap-4 self-start lg:self-end">
-          <div className="font-[family-name:var(--font-emoji)] text-3xl font-semibold tracking-wide text-white sm:text-[41px]">
+        {/* Frame 103: Emojis + Paragraph */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: EASE_EXPO }}
+          className="flex max-w-[367px] flex-col gap-4 self-start lg:self-end"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: EASE_EXPO }}
+            className="font-[family-name:var(--font-emoji)] text-3xl font-semibold tracking-wide text-white sm:text-[41px]"
+          >
             🔥😍👍
-          </div>
+          </motion.div>
           <p className="font-[family-name:var(--font-work)] text-sm font-normal text-white/90 leading-[1.92]">
             In the realm of creativity, technology has become a powerful ally
             for artists, writers, designers, and creators of all kinds.
@@ -31,56 +53,64 @@ export function Hero() {
             companions, assisting naturally creative humans in their creative
             processes.
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Hero Bottom: Interlocking Cards Layout */}
       {/* Desktop (xl: >= 1280px) Exact Coordinate Interlocking Canvas */}
-      <div className="mt-16 hidden xl:block relative h-[335px] w-[1289px] mx-auto">
-        {/* 1. importantImg (x: 0, y: 12, w: 561, h: 317) */}
-        <div className="absolute left-0 top-[12px] w-[561px] h-[317px] drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]">
-          <svg
-            viewBox="-2 -2 565 318"
-            className="h-full w-full overflow-visible"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <clipPath id="desktop-stepped-bird-clip">
-                <path d={steppedCardPath} />
-              </clipPath>
-            </defs>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4, ease: EASE_EXPO }}
+        className="mt-16 hidden xl:block relative h-[335px] w-[1289px] mx-auto"
+      >
+        {/* 1. importantImg with 3D TiltCard (x: 0, y: 12, w: 561, h: 317) */}
+        <div className="absolute left-0 top-[12px] w-[561px] h-[317px]">
+          <TiltCard maxTilt={5} shineOpacity={0.12} className="h-full w-full drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]">
+            <svg
+              viewBox="-2 -2 565 318"
+              className="h-full w-full overflow-visible"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <clipPath id="desktop-stepped-bird-clip">
+                  <path d={steppedCardPath} />
+                </clipPath>
+              </defs>
 
-            {/* Clipped Bird Artwork */}
-            <image
-              href="/assets/Union.png"
-              width="561"
-              height="317"
-              preserveAspectRatio="xMidYMid slice"
-              clipPath="url(#desktop-stepped-bird-clip)"
-            />
+              {/* Clipped Bird Artwork */}
+              <image
+                href="/assets/Union.png"
+                width="561"
+                height="317"
+                preserveAspectRatio="xMidYMid slice"
+                clipPath="url(#desktop-stepped-bird-clip)"
+              />
 
-            {/* Exact Stepped Outline with 2.5px #d2ff3a Stroke & Smooth Curves */}
-            <path
-              d={steppedCardPath}
-              stroke="#d2ff3a"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+              {/* Exact Stepped Outline with 2.5px #d2ff3a Stroke & Smooth Curves */}
+              <path
+                d={steppedCardPath}
+                stroke="#d2ff3a"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
 
-          {/* AI Generator Label Badge (Pen: x: 280, y: 283) */}
-          <div className="pointer-events-none absolute left-[280px] top-[283px]">
-            <span className="font-[family-name:var(--font-work)] text-[21px] font-medium tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-              AI Generator
-            </span>
-          </div>
+            {/* AI Generator Label Badge (Pen: x: 280, y: 283) */}
+            <div className="pointer-events-none absolute left-[280px] top-[283px]">
+              <span className="font-[family-name:var(--font-work)] text-[21px] font-medium tracking-wide text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                AI Generator
+              </span>
+            </div>
+          </TiltCard>
         </div>
 
         {/* 2. Group 15: 300+ Projects Card (x: 584, y: 12, w: 269, h: 137) */}
-        <div
-          className="absolute left-[584px] top-[12px] w-[269px] h-[137px] rounded-[27px] p-6 text-white shadow-xl overflow-hidden flex flex-col justify-center"
+        <motion.div
+          whileHover={{ y: -3, transition: { duration: 0.2, ease: EASE_EXPO } }}
+          className="absolute left-[584px] top-[12px] w-[269px] h-[137px] rounded-[27px] p-6 text-white shadow-xl overflow-hidden flex flex-col justify-center transition-shadow duration-300 hover:shadow-2xl"
           style={{
             background:
               'linear-gradient(180deg, #d2ff3a 0%, rgba(210, 255, 58, 0.15) 60%, rgba(255, 255, 255, 0) 100%)',
@@ -91,10 +121,13 @@ export function Hero() {
             <br />
             Projects
           </div>
-        </div>
+        </motion.div>
 
         {/* 3. Group 14: Community Card (x: 466, y: 170, w: 387, h: 159, nested into step notch) */}
-        <div className="absolute left-[466px] top-[170px] w-[387px] h-[159px] rounded-[24px] bg-[#6843ec] p-[21px] text-white shadow-xl flex flex-col justify-between">
+        <motion.div
+          whileHover={{ y: -3, transition: { duration: 0.2, ease: EASE_EXPO } }}
+          className="absolute left-[466px] top-[170px] w-[387px] h-[159px] rounded-[24px] bg-[#6843ec] p-[21px] text-white shadow-xl flex flex-col justify-between transition-shadow duration-300 hover:shadow-2xl"
+        >
           <h3 className="font-[family-name:var(--font-darker)] text-[29px] font-bold leading-tight text-white">
             We have the best AI image generator
           </h3>
@@ -107,7 +140,7 @@ export function Hero() {
                   key={i}
                   src={url}
                   alt={`Community Member ${i + 1}`}
-                  className="h-[37px] w-[37px] rounded-full object-cover ring-[2.3px] ring-[#d2ff3a]"
+                  className="h-[37px] w-[37px] rounded-full object-cover ring-[2.3px] ring-[#d2ff3a] transition-transform duration-200 hover:scale-115 hover:z-10"
                 />
               ))}
             </div>
@@ -118,10 +151,11 @@ export function Hero() {
               We are waiting for you
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* 4. Group 16: Abstract Geometric Card (x: 866, y: 12, w: 423, h: 208) */}
-        <div
+        <motion.div
+          whileHover={{ y: -3, transition: { duration: 0.2, ease: EASE_EXPO } }}
           className="absolute left-[866px] top-[12px] w-[423px] h-[208px] rounded-[35px] overflow-hidden shadow-xl"
           style={{
             background:
@@ -159,19 +193,22 @@ export function Hero() {
               transform="translate(92.7, -12) rotate(-38.5) scale(0.4691)"
             />
           </svg>
-        </div>
+        </motion.div>
 
         {/* 5. ctaButtonPrimary: Try Free Button (x: 866, y: 230, w: 423, h: 99) */}
-        <a
+        <motion.a
           href="#try-free"
-          className="absolute left-[866px] top-[230px] w-[423px] h-[99px] rounded-[24px] bg-[#d2ff3a] flex items-center justify-center gap-3 text-black shadow-lg shadow-[#d2ff3a]/10 cursor-pointer"
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.2, ease: EASE_EXPO }}
+          className="group absolute left-[866px] top-[230px] w-[423px] h-[99px] rounded-[24px] bg-[#d2ff3a] flex items-center justify-center gap-3 text-black shadow-lg shadow-[#d2ff3a]/20 cursor-pointer"
         >
           <span className="font-[family-name:var(--font-work)] text-[32px] font-medium leading-[1.01]">
             Try Free
           </span>
 
           <svg
-            className="h-7 w-7"
+            className="h-7 w-7 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -182,8 +219,8 @@ export function Hero() {
             <line x1="7" y1="17" x2="17" y2="7" />
             <polyline points="7 7 17 7 17 17" />
           </svg>
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
 
       {/* Mobile/Tablet Fallback Layout (< 1280px) */}
       <div className="mt-12 flex flex-col gap-6 xl:hidden">

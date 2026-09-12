@@ -1,3 +1,5 @@
+import { MaskedTextReveal, MotionReveal } from './motion/MotionReveal'
+
 interface StatCardProps {
   number: string
   numberColor: string
@@ -199,12 +201,14 @@ export function SectionImage() {
       {/* Section Title */}
       <div className="mx-auto mb-12 max-w-[1440px] px-6 text-center sm:px-10 lg:px-[99px]">
         <h2 className="font-[family-name:var(--font-darker)] text-[40px] font-semibold leading-tight tracking-[1px] text-white sm:text-[46px]">
-          Journey Through Art of community
+          <MaskedTextReveal delay={0.1}>
+            Journey Through Art of community
+          </MaskedTextReveal>
         </h2>
       </div>
 
-      {/* Horizontal Infinite Marquee */}
-      <div className="relative w-full overflow-hidden">
+      {/* Horizontal Infinite Marquee with Viewport Entrance */}
+      <MotionReveal yOffset={40} duration={0.9} className="relative w-full overflow-hidden">
         {/* Left & Right Edge Fade Gradients */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-black to-transparent sm:w-32" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-black to-transparent sm:w-32" />
@@ -214,7 +218,7 @@ export function SectionImage() {
           <GalleryTrack />
           <GalleryTrack aria-hidden="true" />
         </div>
-      </div>
+      </MotionReveal>
     </section>
   )
 }

@@ -1,3 +1,7 @@
+import React from 'react'
+import { motion } from 'motion/react'
+import { MotionReveal, EASE_EXPO } from './motion/MotionReveal'
+
 interface SocialIcon {
   name: string
   href: string
@@ -81,8 +85,8 @@ export function Footer() {
       className="relative z-10 w-full rounded-t-[12px] border-t border-[#141414] bg-[#0f0f0f] pt-20 pb-16 text-white"
     >
       <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-12 px-6 sm:px-10 md:flex-row md:items-start lg:px-[99px]">
-        {/* Left Column: Brand & Socials */}
-        <div className="flex flex-col gap-2">
+        {/* Left Column: Brand & Socials with Viewport Entrance */}
+        <MotionReveal yOffset={30} duration={0.8} className="flex flex-col gap-2">
           <span className="font-[family-name:var(--font-turret)] text-[36px] font-bold leading-tight tracking-wider text-white">
             Ether
           </span>
@@ -90,27 +94,30 @@ export function Footer() {
             Managed by Artificial Intelligence
           </p>
 
-          {/* Social Icons Row */}
+          {/* Social Icons Row with Spring Hover */}
           <div className="mt-4 flex items-center gap-2.5">
             {socialLinks.map((item) => (
-              <a
+              <motion.a
                 key={item.name}
                 href={item.href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={item.name}
-                className="group flex h-[16px] w-[26px] items-center justify-center rounded-full bg-[#848895] text-black transition-all duration-200 hover:scale-110 hover:bg-white"
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2, ease: EASE_EXPO }}
+                className="group flex h-[16px] w-[26px] items-center justify-center rounded-full bg-[#848895] text-black transition-colors duration-200 hover:bg-white"
               >
                 {item.icon}
-              </a>
+              </motion.a>
             ))}
           </div>
-        </div>
+        </MotionReveal>
 
-        {/* Right Navigation Columns */}
+        {/* Right Navigation Columns with Choreographed Stagger */}
         <div className="flex gap-16 sm:gap-24">
           {/* Column 1: Ether */}
-          <div className="flex flex-col">
+          <MotionReveal delay={0.15} yOffset={25} duration={0.7} className="flex flex-col">
             <h4 className="font-[family-name:var(--font-darker)] text-[18px] font-bold tracking-wider text-white uppercase">
               Ether
             </h4>
@@ -126,10 +133,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionReveal>
 
           {/* Column 2: Get Connected */}
-          <div className="flex flex-col">
+          <MotionReveal delay={0.25} yOffset={25} duration={0.7} className="flex flex-col">
             <h4 className="font-[family-name:var(--font-darker)] text-[18px] font-bold tracking-wider text-white uppercase">
               Get Connected
             </h4>
@@ -145,19 +152,19 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionReveal>
         </div>
       </div>
 
       {/* Subtle Bottom Divider & Copyright */}
-      <div className="mx-auto mt-16 max-w-[1440px] border-t border-white/5 px-6 pt-8 sm:px-10 lg:px-[99px]">
+      <MotionReveal delay={0.35} yOffset={15} duration={0.6} className="mx-auto mt-16 max-w-[1440px] border-t border-white/5 px-6 pt-8 sm:px-10 lg:px-[99px]">
         <div className="flex flex-col items-center justify-between gap-4 text-[13px] text-[#555] sm:flex-row">
           <p>© {new Date().getFullYear()} Ether AI. All rights reserved.</p>
           <p className="font-[family-name:var(--font-work)] text-[#444]">
             Engineered for high performance on Solana
           </p>
         </div>
-      </div>
+      </MotionReveal>
     </footer>
   )
 }
